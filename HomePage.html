@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <title></title>
+ <style>
+  body {
+  	background-image:url("Images/elephant.jpg");
+  }
+  p {
+  	font-size: 140%;
+  }
+  thead, tbody { display: block;}
+  tbody {
+  	height: 200px;
+  	overflow-y: auto;
+  	overflow-x: hidden;
+  }
+ </style>
+ <p id="test">
+ </p>
+ <script type="text/javascript">
+    	function OrderDetails() {
+    		var Typesofrice   = document.forms["Orders"]["Ricenames"].value;
+        var Amount        = document.forms["Orders"]["Amount"].value;
+        var Deliverydate  = document.forms["Orders"]["Date"].value;
+        var CustomerNotes = document.forms["Orders"]["Customernotes"].value;
+
+				if (Typesofrice == null || Typesofrice == ""){
+		      document.getElementById("lblricenames").innerHTML = "please select rice";
+					return false;
+		    }
+        else if (Amount == null || Amount == "") {
+          document.getElementById("lblamount").innerHTML = " please enter amount";
+          return false;
+        }
+        else if (Deliverydate == null || Deliverydate == "") {
+        	document.getElementById("lbldate").innerHTML = "please enter date";
+					return false;
+        }
+        else if(CustomerNotes == null || CustomerNotes == "") {
+        	document.getElementById("lblcustomernotes").innerHTML = "please enter notes";
+					return false;
+        }
+			}
+
+   	function UserFeedBack() {
+   		var Name 					= document.forms["FeedBackPage"]["name"].value;
+    	var EmailAddress 	= document.forms["FeedBackPage"]["email"].value;
+    	var FeedBack 			= document.forms["FeedBackPage"]["feedback"].value;
+			if (Name == null || Name == "") {
+				document.getElementById("lblname").innerHTML = "Please enter YourName";
+				return false;
+			}
+			else if (EmailAddress == null || EmailAddress == "") {
+				document.getElementById("lblemailaddress").innerHTML = "Please enter EmailAddress";
+        return false;
+	    }
+	    else if (FeedBack == null || FeedBack == "") {
+				document.getElementById("lblfeedback").innerHTML = "Please enter feedback";
+				return false;
+			}
+	}
+
+		/*var jsonObject = new Object();
+		$(document).ready(function(){
+			$("#Myaccount").click(function(){
+				$ajax({
+					url: "http://ec2-35-166-165-34.us-west-2.compute.amazonaws.com:8080/v1/users/3",
+					type: "GET",
+				}).then(function(data){
+					document.forms["Myaccount"]["firstname"].value = data.get("firstName");
+					alert(data.firstName);
+					var jsonString = JSON.stringify(jsonObject);
+
+				})
+			})
+		});*/
+
+  </script>
+
+</head>
+<body>
+	<br/>
+<div class="col-sm-12">
+	<a href="index.html">
+	<button class="btn btn-private" style="float:right;">SignOut</button>
+</a>
+</div>
+<div class="container">
+	<center>
+		<br/>
+		<h1>Welcome To Venkateshwara Rice Mill</h1>
+	</center>
+		<br/>
+		<ul class="nav nav-pills">
+			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+			<li><a data-toggle="tab" href="#OrderHistory">OrderHistory</a><li>
+			<li><a data-toggle="tab" href="#Orders">Place a new order</a></li>
+			<li><a data-toggle="tab" href="#Location">Factory Location</a></li>
+			<li><a data-toggle="tab" href="#FeedBackPage">FeedBack Page</a></li>
+			<li><a data-toggle="tab" href="#Myaccount">MyAccount</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="home" class="tab-pane fade in active">
+				<h2>Home</h2>
+				<p><i>Milling is a crucial step in post-production of rice. The basic objective of a rice factory is to remove the husk and the bran layers, and produce an edible, white rice kernel that is sufficiently milled and free of impurities.</i></p>
+			</div>
+		<div id="OrderHistory" class="tab-pane fade">
+			    	<h2>Order History</h2>
+				<table style="width:46%" class="table table-hover table-bordered">
+						<tr>
+							<th>OrderNumber</th>
+							<th>ItemName</th>
+							<th>Amount</th>
+							<th>PricePerKg</th>
+							<th>OrderDate</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>Parboiled Long Grain Rice</td>
+							<td> 1000rs</td>
+							<td>100rs</td>
+							<td>01-04-2016</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Red Cargo Rice</td>
+							<td> 2000rs</td>
+							<td>300rs</td>
+							<td>02-04-2016</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>Basmati Rice</td>
+							<td>3000rs</td>
+							<td>400rs</td>
+							<td>03-04-2016</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>White Jasmine Rice</td>
+							<td> 4000rs</td>
+							<td>600rs</td>
+							<td>04-04-2016</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>Black Rice</td>
+							<td>5000rs</td>
+							<td>700rs</td>
+							<td>05-04-2016</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>Brown Short Grain rice</td>
+							<td>6000rs</td>
+							<td>800rs</td>
+							<td>08-04-2016</td>
+						</tr>
+
+	</table>
+	</div>
+
+	<div id="Orders" class="tab-pane fade">
+				<h2>Place a new order</h2>
+				<br/>
+	<form name="Orders" class="horizontal" role="form">
+	<div class="form-group">
+			<label for="lblricenames" class="control-label col-sm-2">Rice Types</label>
+		<div class="col-sm-3">
+			<select class="form-control" id="Ricenames">
+        		<option value="Parboiled Long Grain Rice">Parboiled Long Grain Rice</option>
+        		<option value="Red Cargo Rice">Red Cargo Rice</option>
+        		<option value="Basmati Rice">Basmati Rice</option>
+        		<option value="White Jasmine Rice">White Jasmine Rice</option>
+        		<option value="Black Rice">Black Rice</option>
+        		<option value="Brown Short Grain Rice">Brown Short Grain Rice</option>
+        	</select>
+    	</div>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div class="form-group">
+		<label for="lblamount" class="control-label col-sm-2">Amount In Kgs</label>
+			<div class="col-sm-3">
+					<input type="number" class="form-control" id="Amount" placeholder="Enter Amount"/>
+    	</div>
+    </div>
+	    <br/>
+	    <br/>
+    <div class="form-group">
+    	<label for="lbldate" class="control-label col-sm-2">Delivery Date</label>
+    	<div class="col-sm-3">
+    		<input type="date" class="form-control" id="Date"/>
+    	</div>
+    </div>
+    <br/>
+    <br/>
+	<div class="form-group">
+    <label for="lblcustomernotes" class="control-label col-sm-2">Customer Notes</label>
+		<div class="col-sm-3">
+			<textarea class="form-control" id="Customernotes">
+			</textarea>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div class="form-group">
+    <div class="col-sm-2">
+    		<label>Polished</label>
+    		<label class="radio-inline">
+    				<input type="radio" name="optradio">Yes
+    		</label>
+    		<label class="radio-inline">
+						<input type="radio" name="optradio">No
+				</label>
+		</div>
+		</div>
+    	<br/>
+    	<br/>
+    <div class="form-group">
+				<label class="control-label"></label>
+    		<input type="button" class="btn btn-danger" value="Place a new order" onclick="OrderDetails()"/>
+   	</div>
+	</form>
+  </div>
+
+		<div id="Location" class="tab-pane fade">
+			<h2>Factory Location</h2>
+			<address>
+	 				<a href="#Location"></a>
+					Venkateshwara Rice Mill<br/>
+					Warangal<br/>
+					Zipcode: 506330<br/>
+					INDIA
+			</address>
+		</div>
+
+	<div id="FeedBackPage" class="tab-pane fade">
+			<form name="FeedBackPage" class="form-inline" role="form">
+			<h2>FeedBack Page</h2>
+			<br/>
+	<div class="form-inline">
+			<label for="lblname" class="control-label col-sm-1">Name</label>
+		<div class="col-sm-2">
+        <input type="text" class="form-control" id="name" placeholder="Name"/>
+		</div>
+	</div>
+		<br/>
+		<br/>
+		<br/>
+	<div class="form-inline">
+		<label for="lblemailaddress" class="control-label col-sm-1">Email</label>
+		<div class="col-sm-2">
+		  	<input type="text" class="form-control" id="email" placeholder="Email"/>
+    </div>
+  </div>
+		<br/>
+		<br/>
+		<br/>
+	<div class="form-inline">
+			<label for="lblfeedback" class="control-label col-sm-1">Feedback</label>
+			<div class="col-sm-2">
+            <textarea  class="form-control" id="feedback"></textarea>
+      </div>
+  </div>
+			<br/>`
+			<br/>
+			<br/>
+			<br/>
+	<div class="form-group">
+			<label class="control-label"></label>
+			<div class="col-sm-1">
+					<input type="button" class="btn btn-danger" value="Submit Feedback" onclick="UserFeedBack()"/>
+			</div>
+	</div>
+	</form>
+</div>
+
+<div id="Myaccount" class="tab-pane fade">
+<form class="form-inline" role="form">
+	<h3>Your Details</h3>
+	<br/>
+<div class="form-group">
+		<label class="control-label"></label>
+			<input type="text" class="form-control" placeholder="Firstname"/>
+</div>
+
+<div class="form-group">
+		<label class="control-label col-sm-1"></label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" placeholder="Lastname"/>
+		</div>
+</div>
+	<br/>
+	<br/>
+	<div class="form-group">
+		<label class="control-label"></label>
+			<input type="text" class="form-control" placeholder="Email"/>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-1"></label>
+		<div class="col-sm-3">
+			<input type="password" class="form-control" placeholder="Password"/>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="form-group">
+		<label class="control-label"></label>
+			<input type="text" class="form-control" placeholder="Address1"/>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-1"></label>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" placeholder="Address2"/>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="form-group">
+		<label class="control-label"></label>
+			<input type="number" class="form-control" placeholder="Contact1"/>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-1"></label>
+		<div class="col-sm-3">
+			<input type="number" class="form-control" placeholder="Contact2"/>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="form-group">
+		<label class="control-label"></label>
+			<input type="text" class="form-control" placeholder="City"/>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-sm-1"></label>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" placeholder="State"/>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="form-group">
+		<label class="control-label"</label>
+			<input type="number" class="form-control" placeholder="Zipcode"/>
+	</div>
+	<br/>
+	<br/>
+<div class="form-group">
+		<label class="control-label"></label>
+	   <input type="button" class="btn btn-danger" value="Save"/>
+</div>
+</form>
+</div>
+
+</div>
+</div>
+</body>
+</html>

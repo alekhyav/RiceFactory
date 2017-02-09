@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta name="ViewBoot" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.3.1/superagent.js"></script>
+    <title></title>
+    <style>
+    body {
+    	background-image: url("Images/colors.jpg");
+    }
+    </style>
+    <script type="text/javascript">
+
+    function GetCustomerDetails() {
+    	var firstName    = document.forms["Customerdetails"]["FirstName"].value;
+    	var lastName 		 = document.forms["Customerdetails"]["LastName"].value;
+    	var email 			 = document.forms["Customerdetails"]["Email"].value;
+    	var password 		 = document.forms["Customerdetails"]["Password"].value;
+    	var address1 		 = document.forms["Customerdetails"]["Address1"].value;
+    	var address2 		 = document.forms["Customerdetails"]["Address2"].value;
+    	var phoneNumber1 = document.forms["Customerdetails"]["PhoneNumber1"].value;
+    	var phoneNumber2 = document.forms["Customerdetails"]["PhoneNumber2"].value;
+    	var city 				 = document.forms["Customerdetails"]["City"].value;
+    	var state 			 = document.forms["Customerdetails"]["State"].value;
+    	var zipCode 		 = document.forms["Customerdetails"]["ZipCode"].value;
+
+    	if (firstName == null || firstName == "") {
+    		document.getElementById("lblfirstname").innerHTML = "Please enter firstname";
+    		return false;
+    	}
+    	else if (lastName == null || lastName == "") {
+    		document.getElementById("lbllastname").innerHTML = "Please enter lastname";
+    		return false;
+    	}
+    	else if (email == null || email == "") {
+  			document.getElementById("lblemail").innerHTML = "Please enter emailaddress";
+  			return false;
+      }
+      else if (password == null || password == "") {
+        document.getElementById("lblpassword").innerHTML = "Please enter password";
+        return false;
+      }
+      else if (address1 == null || address1 == "") {
+      	document.getElementById("lbladdress1").innerHTML = "Please enter address";
+      	return false;
+      }
+      else if (address2 == null || address2 == "") {
+      	document.getElementById("lbladdress2").innerHTML = "Please enter address";
+      	return false;
+      }
+      else if (phoneNumber1 == null || phoneNumber1 == ""){
+      	document.getElementById("lblphonenumber1").innerHTML = "Please enter phonenumber";
+      	return false;
+      }
+      else if (phoneNumber2 == null || phoneNumber2 == ""){
+      	document.getElementById("lblphonenumber2").innerHTML = "Please enter phonenumber";
+      	return false;
+      }
+      else if (city == null || city == "") {
+      	document.getElementById("lblCity").innerHTML = "Please enter city";
+      	return false;
+      }
+      else if (state == null || state == "") {
+      	document.getElementById("lblState").innerHTML = "Please enter state";
+      	return false;
+      }
+      else if (zipCode == null || zipCode == ""){
+        document.getElementById("lblzipcode").innerHTML = "Please enter zipcode";
+				return false;
+  	}
+
+    	var jsonObject = new Object();
+    	jsonObject.firstName = firstName;
+			    	jsonObject.lastName = lastName;
+			    	jsonObject.email = email;
+			    	jsonObject.password = password;
+			    	jsonObject.address1 = address1;
+			    	jsonObject.address2 = address2;
+			    	jsonObject.phoneNumber1 = phoneNumber1;
+			    	jsonObject.phoneNumber2 = phoneNumber2;
+			    	jsonObject.city = city;
+			    	jsonObject.state = state;
+			    	jsonObject.zipCode = zipCode;
+
+		  var jsonString = JSON.stringify(jsonObject);
+			var request = window.superagent;
+
+			//Hardcoded the REST WS URL with ipAddress.
+			request.post('http://ec2-35-166-165-34.us-west-2.compute.amazonaws.com:8080/v1/users')
+				  .set('Accept', 'application/json')
+				  .set('Content-Type', 'application/json')
+				  .send(jsonString)
+				  .end(function(err, res){
+				    if (err || !res.ok) {
+				      alert('Oh no! error');
+				    } else {
+				      alert('yay got ' + JSON.stringify(res.body));
+				    }
+				  });
+			}
+
+   </script>
+</head>
+<body>
+	<div class="container">
+		<h1>Create Account</h1><h4>(All fields are mandatory)</h4>
+         <br/>
+         <br/>
+		<div id="Customerdetails">
+			<form name="Customerdetails" class="horizontal" role="form" onsubmit="return ValidateForm()">
+
+		<div class="row">
+				<label id="lblfirstname" class="control-label col-sm-1">FirstName</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="FirstName" placeholder="Enter FirstName"/>
+			</div>
+
+			<label id="lbllastname" class="control-label col-sm-1">Lastname</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="LastName" placeholder="Enter LastName"/>
+
+			</div>
+		</div>
+       <br/>
+		<div class="row">
+			<label id="lblemail" class="control-label col-sm-1">Email</label>
+			<div class="col-sm-5">
+				<input type="email" class="form-control" id="Email" placeholder="Enter Email"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<label id="lblpassword" class="control-label col-sm-1">Password</label>
+			<div class="col-sm-5">
+				<input type="password" class="form-control" id="Password" maxlength="8" placeholder="Enter Password"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<label id="lbladdress1" class="control-label col-sm-1">Address1</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="Address1" maxlength="35" placeholder="Enter Primary address"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<label id="lbladdress2" class="control-label col-sm-1">Address2</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="Address2" maxlength="35" placeholder="Enter Secondary address"/>
+			</div>
+		</div>
+		<br/>
+
+		<div class="row">
+			<label id="lblphonenumber1" class="control-label col-sm-1">Phonenumber</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="PhoneNumber1" maxlength="8" placeholder="Enter Primary number"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<label id="lblphonenumber2" class="control-label col-sm-1">Phonenumber</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="PhoneNumber2" maxlength="8" placeholder="Enter Secondary number"/>
+			</div>
+		</div>
+		<br/>
+
+		<div class="row">
+			<label id="lblCity" class="control-label col-sm-1">City</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="City" placeholder="Enter City"/>
+			</div>
+
+			<label id="lblState" class="control-label col-sm-1">State</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="State" placeholder="Enter State"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<label id="lblzipcode" class="control-label col-sm-1">Zipcode</label>
+			<div class="col-sm-5">
+				<input type="number" class="form-control" id="ZipCode" placeholder="Enter Zipcode"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<label class="control-label col-sm-1"></label>
+			<div class="col-md-2"></div>
+				<input type="button" class="btn btn-warning" value="SIGN UP" onclick="GetCustomerDetails()"/>
+			</div>
+		</div>
+	</form>
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta name="ViewBoot" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <center>
+    <title></title>
+    <style>
+    body {
+        background-image: url("Images/colors.jpg");
+    }
+    </style>
+    <p id="test">
+    </p>
+    <script type="text/javascript">
+    function CustomerDetails() {
+    	var userName 			= document.forms["Login"]["name"].value;
+    	var userPassword 	= document.forms["Login"]["password"].value;
+    	if (userName == null || userName == "") {
+    		document.getElementById("lblUsername").innerHTML = "Please enter valid username";
+    		return false;
+    	}
+    	else if (userPassword == null || userPassword == "") {
+    		document.getElementById("lblPassword").innerHTML = "Please enter valid password";
+    		return false;
+    	}
+        window.location.href='HomePage.html';
+    }
+</script>
+
+</head>
+<body>
+<div class="container">
+    <br/>
+	<h1>
+        Login Page
+    </h1>
+    <br/>
+<div class="tab-content">
+<div id="Login">
+<form name="Login" class="form-horizontal" role="form">
+<div class="form-group">
+    <label id="lblUsername" class="control-label col-sm-5">Username</label>
+	  <div class="col-sm-2">
+	        <input type="text" class="form-control" id="name" placeholder="Enter Username"/>
+		</div>
+</div>
+	<br/>
+<div class="form-group">
+  	<label id="lblPassword" class="control-label col-sm-5">Password</label>
+    <div class="col-sm-2">
+       <input type="password" class="form-control" id="password" placeholder="Enter password"/>
+    </div>
+</div>
+		<br/>
+<div class="form-group">
+    <label class="control-label"></label>
+    <input type="button" class="btn btn-warning" value="Log In" onclick="CustomerDetails()"/>
+		<label class="control-label"></label>
+			<a href="CreateAccount.html">
+				<input type="button" class="btn btn-warning" value="SignUp" onclick="CustomerDetails()"/>
+			</a>
+	</div>
+  </div>
+
+</form>
+</div>
+    </center>
+</div>
+</body>
+</html>
